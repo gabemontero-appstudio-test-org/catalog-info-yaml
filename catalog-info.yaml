@@ -1,0 +1,79 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: ./
+  links:
+  - icon: WebAsset
+    title: API URL
+    type: website
+    url: https://mnist-100-2024-12-13t193928476z-ggmtest.apps.gmontero415.devcluster.openshift.com
+  - icon: WebAsset
+    title: predictor FastAPI URL
+    type: website
+    url: https://mnist-100-2024-12-13t193928476z-predictor-ggmtest.apps.gmontero415.devcluster.openshift.com/docs
+  - icon: WebAsset
+    title: predictor model serving URL
+    type: website
+    url: https://mnist-100-2024-12-13t193928476z-predictor-ggmtest.apps.gmontero415.devcluster.openshift.com
+  - icon: WebAsset
+    type: website
+    url: https://huggingface.co/tarilabs/mnist/resolve/v20231206163028/mnist.onnx
+  name: mnist
+spec:
+  dependsOn:
+  - resource:1.0.0
+  - api:1.0.0
+  lifecycle: prod
+  owner: user:kube:admin
+  profile:
+    displayName: mnist
+  type: model-server
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: resource/
+  links:
+  - icon: WebAsset
+    type: website
+    url: https://huggingface.co/tarilabs/mnist/resolve/v20231206163028/mnist.onnx
+  name: 1.0.0
+spec:
+  dependencyOf:
+  - component:mnist
+  lifecycle: prod
+  owner: user:kube:admin
+  profile:
+    displayName: 1.0.0
+  type: ai-model
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  annotations:
+    backstage.io/techdocs-ref: api/
+  links:
+  - icon: WebAsset
+    title: API URL
+    type: website
+    url: https://mnist-100-2024-12-13t193928476z-ggmtest.apps.gmontero415.devcluster.openshift.com
+  - icon: WebAsset
+    title: predictor FastAPI URL
+    type: website
+    url: https://mnist-100-2024-12-13t193928476z-predictor-ggmtest.apps.gmontero415.devcluster.openshift.com/docs
+  - icon: WebAsset
+    title: predictor model serving URL
+    type: website
+    url: https://mnist-100-2024-12-13t193928476z-predictor-ggmtest.apps.gmontero415.devcluster.openshift.com
+  name: mnist
+spec:
+  definition: no-definition-yet
+  dependencyOf:
+  - component:mnist
+  lifecycle: prod
+  owner: user:kube:admin
+  profile:
+    displayName: mnist
+  type: ""
